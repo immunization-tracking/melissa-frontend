@@ -26,8 +26,15 @@ import {
   Button
 } from 'reactstrap';
 import { FiHeart } from 'react-icons/fi';
-
+import styled from 'styled-components';
 import splashImage from '../assets/childAndMom.jpg';
+const Footer = styled.footer`
+background-color: black;
+padding: 2rem;
+color: white;
+`
+
+
 // import { fromEventPattern } from 'rxjs';
 // import ChildPatientDashboard from './ChildPatientDashboard';
 // import {  } from 'reactstrap';
@@ -41,10 +48,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar>
+        <Navbar color='dark' light>
           <Nav>
             <NavbarBrand>
-              <h1>Immunization Tracker</h1>
+              <h1 className='text-light'>Immunization Tracker</h1>
             </NavbarBrand>
 
             <NavLink>
@@ -108,6 +115,13 @@ class App extends Component {
             </Col>
           </Row>
         </Container>
+        <Footer className='footer'>
+          <Row>
+            <Col>Immunization tracker, All Rights Reserved</Col>
+            <Col className='text-right'>A Project by Lambda School Students</Col>
+          </Row>
+
+          </Footer>
 
         
         <Route

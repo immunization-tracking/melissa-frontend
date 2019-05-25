@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions';
 
-import { Input } from 'reactstrap';
+import { Input, Form, Card, Button } from 'reactstrap';
 
 class PatientLogin extends Component {
   state = {
@@ -59,40 +59,41 @@ class PatientLogin extends Component {
     console.log(`-----------------------this.props`, this.props);
     return (
       <div>
-        <form onSubmit={this.handleLogin}>
-        <div>
-          {this.state.submitted  && ! this.state.credentials.username && (
-            <p>username req</p>
-          )}
-          {this.props.error && (
-            <p>invalid credentials</p>
-          )}
-        </div>
-          <Input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={this.state.credentials.username}
-            onChange={this.handleChange}
-          />
-        <div>
-          {this.state.submitted  && ! this.state.credentials.password && (
-            <p>password req</p>
-          )}
-          {this.props.error && (
-            <p>invalid credentials</p>
-          )}
-        </div>
-          <Input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={this.state.credentials.password}
-            onChange={this.handleChange}
-          />
-          <button>login</button>
-          {/* onClick={this.login} */}
-        </form>
+        <Card className="p-5">
+          <Form onSubmit={this.handleLogin}>
+            <div>
+              {this.state.submitted && !this.state.credentials.username && (
+                <p>username req</p>
+              )}
+              {this.props.error && <p>invalid credentials</p>}
+            </div>
+            <Input
+              className="py-1"
+              placeholder="username"
+              type="text"
+              name="username"
+              value={this.state.credentials.username}
+              onChange={this.handleChange}
+            />
+            <div>
+              {this.state.submitted && !this.state.credentials.password && (
+                <p>password req</p>
+              )}
+              {this.props.error && <p>invalid credentials</p>}
+            </div>
+            <Input
+              placeholder="password"
+              type="password"
+              name="password"
+              value={this.state.credentials.password}
+              onChange={this.handleChange}
+            />
+            <Button className="mt-3 btn-light btn-outline-success">
+              login
+            </Button>
+            {/* onClick={this.login} */}
+          </Form>
+        </Card>
       </div>
     );
   }
@@ -102,8 +103,8 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
     error: state.error
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,

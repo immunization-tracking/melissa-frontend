@@ -42,18 +42,21 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar>
-          <Nav >
-            <NavbarBrand><h1>Immunization Tracker</h1></NavbarBrand>
+          <Nav>
+            <NavbarBrand>
+              <h1>Immunization Tracker</h1>
+            </NavbarBrand>
 
             <NavLink>
-              <Link to="/patient-login"><Button className='btn-success'>Patient Login</Button></Link>
+              <Link to="/patient-login">
+                <Button className="btn-success">Patient Login</Button>
+              </Link>
             </NavLink>
-            <NavLink>
-             
-            </NavLink>
+            <NavLink />
           </Nav>
         </Navbar>
         <Container>
+        <Route path="/patient-login" component={PatientLogin} />
           <Row className="py-5">
             <Col>
               <Media
@@ -64,11 +67,11 @@ class App extends Component {
               />
             </Col>
             <Col>
-              <Card className='p-2'>
+              <Card className="p-2">
                 <CardTitle>
                   <h1>
                     They mean <br />
-                    everything to you <FiHeart color='#ff0000'  />
+                    everything to you <FiHeart color="#ff0000" />
                   </h1>
                 </CardTitle>
                 <CardSubtitle>
@@ -80,21 +83,33 @@ class App extends Component {
                   <CardText>
                     <h5>Immunization Tracker will:</h5>
                     <ul>
-                      <li>Help you track the immunization schedule for all of your dependents dependents from one central dashboard</li>
-                      <li>Connect Immunization Tracker with your child's pediatrician for automated updates and notifications</li>
-                      <li>Keep your imformation private! You have complete control over your information, and the ability to remove your data from our servers at any time</li>
+                      <li>
+                        Help you track the immunization schedule for all of your
+                        dependents dependents from one central dashboard
+                      </li>
+                      <li>
+                        Connect Immunization Tracker with your child's
+                        pediatrician for automated updates and notifications
+                      </li>
+                      <li>
+                        Keep your imformation private! You have complete control
+                        over your information, and the ability to remove your
+                        data from our servers at any time
+                      </li>
                     </ul>
                   </CardText>
                 </CardBody>
                 <CardFooter>
-               <Link to="/new-patient"><Button className='btn-lg'>Sign Up Today!</Button></Link>
+                  <Link to="/new-patient">
+                    <Button className="">Sign Up Today!</Button>
+                  </Link>
                 </CardFooter>
               </Card>
             </Col>
           </Row>
         </Container>
 
-        <Route path="/patient-login" component={PatientLogin} />
+        
         <Route
           path="/new-patient"
           component={props => (

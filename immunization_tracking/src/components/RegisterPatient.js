@@ -65,7 +65,7 @@ class RegisterPatient extends Component {
           <Card>
             <CardTitle>Welcome! Please register below:</CardTitle>
             <CardSubtitle>
-              Create your personal immunization dashboard!
+              Create your family's immunization dashboard!
             </CardSubtitle>
             <CardBody>
               <Form onSubmit={this.registerPatient}>

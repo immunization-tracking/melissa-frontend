@@ -45,19 +45,19 @@ class RegisterPatient extends Component {
         ...this.state.credentials,
         [e.trarget.name]: e.target.value
       }
-    })
+    });
   };
 
   handleChanges = e => {
     e.preventDefault();
 
-    this.props.registerPatient(this.state.credentials)
-    this.setState({ RegisterPatient:true })
+    this.props.registerPatient(this.state.credentials);
+    this.setState({ RegisterPatient: true });
   };
 
   render() {
     if (this.state.RegisterPatient === true) {
-      return <Redirect to='/PatientLogin'/>
+      return <Redirect to="/PatientLogin" />;
     }
     return (
       <div className="new-registration">
@@ -103,7 +103,7 @@ class RegisterPatient extends Component {
                   value={this.state.credentials.email}
                 />
               </FormGroup>
-              {/* <FormGroup>
+              <FormGroup>
                 <Label for="first_name">First Name:</Label>
                 <Input
                   type="text"
@@ -148,8 +148,8 @@ class RegisterPatient extends Component {
                   onChange={this.handleChanges}
                   value={this.state.creds.tel}
                 />
-              </FormGroup> */}
-              {/* <FormGroup>
+              </FormGroup>
+              <FormGroup>
                 <Label for="avatar">Upload your personal avatar:</Label>
                 <Input
                   type="text"
@@ -159,12 +159,10 @@ class RegisterPatient extends Component {
                   onChange={this.handleChanges}
                   value={this.state.credentials.avatar}
                 />
-              </FormGroup> */}
+              </FormGroup>
             </CardBody>
             <CardFooter>
-              <Button type="submit">
-                Create New Profile
-              </Button>
+              <Button type="submit">Create New Profile</Button>
             </CardFooter>
           </Card>
         </Container>

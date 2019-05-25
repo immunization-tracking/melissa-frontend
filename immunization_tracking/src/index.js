@@ -8,8 +8,8 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import reducer from './reducers';
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-// import './styles/custom_styles.scss';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './styles/custom_styles.scss';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

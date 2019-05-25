@@ -8,8 +8,29 @@ import PatientDashboard from './PatientDashboard';
 import { fetchPatients } from '../actions';
 import RegisterPatient from './RegisterPatient';
 
+import {
+  Navbar,
+  NavLink,
+  NavbarBrand,
+  Nav,
+  Container,
+  Row,
+  Col,
+  Card,
+  CardTitle,
+  CardSubtitle,
+  CardBody,
+  CardText,
+  Media,
+  CardFooter,
+  Button
+} from 'reactstrap';
+import { FiHeart } from 'react-icons/fi';
+
+import splashImage from '../assets/childAndMom.jpg';
+// import { fromEventPattern } from 'rxjs';
 // import ChildPatientDashboard from './ChildPatientDashboard';
-// import { Button } from 'reactstrap';
+// import {  } from 'reactstrap';
 
 class App extends Component {
   componentDidMount() {
@@ -20,13 +41,58 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="header">
-          <h1>Immunization Tracker</h1>
-          <p>
-            <Link to="/patient-login">Patient Login</Link>
-            <Link to="/new-patient">Register Now</Link>
-          </p>
-        </div>
+        <Navbar>
+          <Nav >
+            <NavbarBrand><h1>Immunization Tracker</h1></NavbarBrand>
+
+            <NavLink>
+              <Link to="/patient-login"><Button className='btn-success'>Patient Login</Button></Link>
+            </NavLink>
+            <NavLink>
+             
+            </NavLink>
+          </Nav>
+        </Navbar>
+        <Container>
+          <Row className="py-5">
+            <Col>
+              <Media
+                object
+                className="img-fluid shadow-lg rounded"
+                src={splashImage}
+                alt="mother and child"
+              />
+            </Col>
+            <Col>
+              <Card className='p-2'>
+                <CardTitle>
+                  <h1>
+                    They mean <br />
+                    everything to you <FiHeart color='#ff0000'  />
+                  </h1>
+                </CardTitle>
+                <CardSubtitle>
+                  <h3 className="text-right pr-5">
+                    Let us help you keep them safe.
+                  </h3>
+                </CardSubtitle>
+                <CardBody>
+                  <CardText>
+                    <h5>Immunization Tracker will:</h5>
+                    <ul>
+                      <li>Help you track the immunization schedule for all of your dependents dependents from one central dashboard</li>
+                      <li>Connect Immunization Tracker with your child's pediatrician for automated updates and notifications</li>
+                      <li>Keep your imformation private! You have complete control over your information, and the ability to remove your data from our servers at any time</li>
+                    </ul>
+                  </CardText>
+                </CardBody>
+                <CardFooter>
+               <Link to="/new-patient"><Button className='btn-lg'>Sign Up Today!</Button></Link>
+                </CardFooter>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
 
         <Route path="/patient-login" component={PatientLogin} />
         <Route

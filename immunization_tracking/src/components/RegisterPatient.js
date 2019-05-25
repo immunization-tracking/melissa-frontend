@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { registerPatient } from '../actions';
 
 import {
@@ -29,58 +30,35 @@ class RegisterPatient extends Component {
       tel: '',
       avatar: '',
       ss_id: ''
-    }
+    },
+    accountSubmitted: false
   };
 
-  // register = e => {
-  //   e.preventDefault();
-  //   console.log(`------------------seriously, WTF MATE`, this.state.creds);
-  //   console.log(`----------------------------------------WTF MATE`, this.props.registerPatient);
-  //   console.log(`----------------------------------------WTF MATE`, this.state.isRegistering);
-  //   //this.state.isRegistering <----------im not passing this am I
-  //   this.props.registerPatient(this.state.creds).then(() => {
-  //     this.props.history.push({
-  //       pathname: '/patient-login',
-  //       state: {
-  //         username: this.state.creds.username,
-  //         password: this.state.creds.password
-  //       }
-  //     });
-  //   });
-  // };
+  handleInput = e => {
+    // e.preventDefault();
+    // console.log(`------------------seriously, WTF MATE`, this.state.creds);
+    // console.log(`----------------------------------------WTF MATE`, this.props.registerPatient);
+    // console.log(`----------------------------------------WTF MATE`, this.state.isRegistering);
+    //this.state.isRegistering <----------im not passing this am I
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.trarget.name]: e.target.value
+      }
+    })
+  };
 
   handleChanges = e => {
-    this.setState({
-      creds: {
-        ...this.state.creds,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
-  register = e => {
     e.preventDefault();
-    console.log(`------------------seriously, WTF MATE`, this.state.creds);
-    console.log(
-      `----------------------------------------WTF MATE`,
-      this.props.registerPatient
-    );
-    console.log(
-      `----------------------------------------WTF MATE`,
-      this.state.isRegistering
-    );
-    this.props.registerPatient(this.state.creds).then(() => {
-      this.props.history.push({
-        pathname: '/patient-login',
-        state: {
-          username: this.state.creds.username,
-          password: this.state.creds.password
-        }
-      });
-    });
+
+    this.props.registerPatient(this.state.credentials)
+    this.setState({ RegisterPatient:true })
   };
 
   render() {
+    if (this.state.RegisterPatient === true) {
+      return <Redirect to='/PatientLogin'/>
+    }
     return (
       <div className="new-registration">
         <Container>
@@ -90,7 +68,7 @@ class RegisterPatient extends Component {
               Create your personal immunization dashboard!
             </CardSubtitle>
             <CardBody>
-              <Form onSubmit={this.register}>
+              <Form onSubmit={this.registerPatient}>
                 <FormGroup>
                   <Label for="username">Username:</Label>
                   <Input
@@ -98,8 +76,8 @@ class RegisterPatient extends Component {
                     name="username"
                     id="username"
                     placeholder="Please choose a username"
-                    onChange={this.handleChanges}
-                    value={this.state.creds.username}
+                    onChange={this.handleInput}
+                    value={this.state.credentials.username}
                   />
                 </FormGroup>
               </Form>
@@ -110,8 +88,8 @@ class RegisterPatient extends Component {
                   name="password"
                   id="password"
                   placeholder="Please choose a password"
-                  onChange={this.handleChanges}
-                  value={this.state.creds.password}
+                  onChange={this.handleInput}
+                  value={this.state.credentials.password}
                 />
               </FormGroup>
               <FormGroup>
@@ -122,7 +100,7 @@ class RegisterPatient extends Component {
                   id="email"
                   placeholder="Please enter your email"
                   onChange={this.handleChanges}
-                  value={this.state.creds.email}
+                  value={this.state.credentials.email}
                 />
               </FormGroup>
               {/* <FormGroup>
@@ -184,7 +162,7 @@ class RegisterPatient extends Component {
               </FormGroup> */}
             </CardBody>
             <CardFooter>
-              <Button type="submit" onClick={this.state.register}>
+              <Button type="submit">
                 Create New Profile
               </Button>
             </CardFooter>

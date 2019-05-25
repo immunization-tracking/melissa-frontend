@@ -9,25 +9,26 @@ class PatientLogin extends Component {
     credentials: {
       username: '',
       password: ''
-    }
+    },
+    submitted: false
   };
 
-  componentDidMount = () => {
-    if (this.props.location.state) {
-      console.log(this.props.location.state);
-      if (
-        this.props.location.state.email &&
-        this.props.location.state.password
-      ) {
-        this.setState({
-          credentials: {
-            email: this.props.location.state.email,
-            password: this.props.location.state.password
-          }
-        });
-      }
-    }
-  };
+  // componentDidMount = () => {
+  //   if (this.props.location.state) {
+  //     console.log(this.props.location.state);
+  //     if (
+  //       this.props.location.state.email &&
+  //       this.props.location.state.password
+  //     ) {
+  //       this.setState({
+  //         credentials: {
+  //           email: this.props.location.state.email,
+  //           password: this.props.location.state.password
+  //         }
+  //       });
+  //     }
+  //   }
+  // };
 
   handleChange = e => {
     this.setState({
@@ -38,19 +39,35 @@ class PatientLogin extends Component {
     });
   };
 
-  login = e => {
+  handleLogin = e => {
     e.preventDefault();
-    console.log(`--------------current auth state`, this.state.creds);
-    this.props.login(this.state.creds).then(() => {
-      this.props.history.push('/patient-dashboard');
-    });
+    this.setState({ submitted: true });
+    // console.log(`--------------current auth state`, this.state.creds);
+    if (this.state.credentials.username && this.state.credentials.password) {
+      this.props
+        .login(this.state.credentials)
+        .then(() => this.props.history.push('/patient-dashboard'));
+    }
   };
+
+  //   this.props.login(this.state.creds).then(() => {
+  //     this.props.history.push('/patient-dashboard');
+  //   });
+  // };
 
   render() {
     console.log(`-----------------------this.props`, this.props);
     return (
       <div>
-        <form onSubmit={this.login}>
+        <form onSubmit={this.handleLogin}>
+        <div>
+          {this.state.submitted  && ! this.state.credentials.username && (
+            <p>username req</p>
+          )}
+          {this.props.error && (
+            <p>invalid credentials</p>
+          )}
+        </div>
           <Input
             placeholder="username"
             type="text"
@@ -58,6 +75,14 @@ class PatientLogin extends Component {
             value={this.state.credentials.username}
             onChange={this.handleChange}
           />
+        <div>
+          {this.state.submitted  && ! this.state.credentials.password && (
+            <p>password req</p>
+          )}
+          {this.props.error && (
+            <p>invalid credentials</p>
+          )}
+        </div>
           <Input
             placeholder="password"
             type="password"
@@ -73,7 +98,14 @@ class PatientLogin extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+    error: state.error
+  }
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(PatientLogin);

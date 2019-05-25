@@ -1,5 +1,5 @@
 // Patient Actions
-
+import axios from 'axios';
 import { axiosAuth } from '../axiosAuth';
 
 export const URL = 'https://immunization-tracker-backend.herokuapp.com';
@@ -40,7 +40,8 @@ export const registerPatient = creds => dispatch => {
     `-------------------------patient register fired` + JSON.stringify(creds)
   );
   dispatch({ type: REGISTER_START });
-  axiosAuth()
+  // axiosAuth()
+  axios
     .post(`${URL}/register?role=1`, creds)
     .then(res => {
       // console.log(`------------------------response`, res);

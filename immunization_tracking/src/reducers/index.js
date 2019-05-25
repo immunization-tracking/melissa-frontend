@@ -61,7 +61,7 @@ function reducer(state = initialState, action) {
         isLoggedIn: false,
         isLoading: false
       };
-      case REGISTER_START:
+    case REGISTER_START:
       return {
         ...state,
         error: '',
